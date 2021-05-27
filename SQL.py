@@ -84,8 +84,23 @@ def del_record(id_):
         cur.execute(f'DELETE FROM user_db WHERE (id_ = "{id_}")')
         conn.commit()
         print("del_record:Запись найдена, Удалена")
-        return True    
-
+        return True 
+    
+def get_time_record(time):
+    conn = sqlite3.connect('data.db')
+    cur = conn.cursor()    
+    cur.execute(f'SELECT * FROM user_db WHERE (time = "{time}")')
+    result = cur.fetchall()
+    print("get_time_record: результат поиска", result)
+    if result == []:
+        return False
+    else:
+        word=[]
+        for r in result:
+            w={"id":r[0],"user":r[1],"name":r[2],"lat":r[3],"lon":r[4],"time":r[5]}
+            word.append(w)
+        print("get_time_record: результат ", word)
+        return word    
 
 if __name__ == "__main__":    
     creat_base()
@@ -93,8 +108,12 @@ if __name__ == "__main__":
     name=random.randrange(1,100)
     lat=3
     lon=4
-    time=8
-    #print(add_base(user, name, lat, lon))
-    print(get_records(user))
+    time=9
+    for i in range(0,60):
+        
+        print(add_base(user+i, random.randrange(1,100), lat, lon, i))
+        
+    #print(add_base(user, name, lat, lon, time))
+    #print(get_records(user))
     #print(get_record(10))
     #print(del_record(5))

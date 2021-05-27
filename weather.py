@@ -14,8 +14,9 @@ ROOT_URL_ONE = 'https://api.openweathermap.org/data/2.5/onecall'
 ROOT_URL_CUR="http://api.openweathermap.org/data/2.5/weather" 
 ROOT_AIR = "http://api.openweathermap.org/data/2.5/air_pollution"
 ROOT_URL_GEO="http://api.openweathermap.org/geo/1.0/direct"
+ROOT_URL_RGEO="http://api.openweathermap.org/geo/1.0/reverse" #?lat={lat}&lon={lon}&limit={limit}&appid={API key}
 
-def get_coord_in_name(city_name):    
+def get_coord_in_name(city_name):
     data = requests.get(ROOT_URL_GEO,
              params={'q': city_name,'units': 'metric','lang': 'ru', 'APPID': WEA_KEY}).json()
     print("get_coord_in_name:", city_name,"->", data)
@@ -117,12 +118,14 @@ def get_weather_name_prognoz(city_name):
 '''
 
 if __name__ == "__main__":
-    print(get_weather_сurrent(0,0)) 
-    #get_weather_detail(lat=66.396693, lon=77.16208) 
+    #print(get_weather_сurrent(0,0)) 
+    get_weather_detail(lat=66.396693, lon=77.16208) 
     #get_air_one(lat=66.396693, lon=77.16208)
-    #print(get_air_name("barnaul"))
+    print(get_coord_in_name("barnaul"))
     #print(get_coord_in_name("123"))
     #print(get_coord_in_name("OMSK"))
     #print(get_weather_name_prognoz("purpe"))
+    #get_name_in_coord(53.3606, 83.7636)
+    get_name_in_coord(66.396658, 77.161698)
     pass
 
