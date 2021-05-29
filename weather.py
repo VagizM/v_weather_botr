@@ -23,6 +23,9 @@ def get_coord_in_name(city_name):
     if data == []:
         print("get_coord_in_name: ответ пуст", data)
         return False 
+    if "cod" in data and data["cod"]=="404":
+        print("get_coord_in_name: 400", data)
+        return False         
     if ("lat" in data[0]) and ("lon" in data[0]):
         print("get_coord_in_name: возвращены координаты", data)
         return  ({"lat":data[0]["lat"],"lon":data[0]["lon"],"name":data[0]["name"]})    
